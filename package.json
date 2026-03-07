@@ -1,0 +1,19 @@
+{
+  "name": "code-loader-template",
+  "version": "0.0.1",
+  "description": "Template for the code loader",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "author": "hansdiewurst",
+  "type": "module",
+  "dependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/generator": "^7.29.1",
+    "avsc": "^5.7.9",
+    "esbuild": "^0.27.3"
+  }
+}
