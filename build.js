@@ -59,7 +59,7 @@ function handleFile(filePath) {
 
     traverse(ast, {
         ImportDeclaration(path) {
-            const importPath = node_path.resolve(dirname, path.node.source.value);
+            const importPath = node_path.resolve(dirname, path.node.source.value.replace(/(?<!\.js)$/, ".js"));
             if(!moduleStack.includes(importPath) && !fileQueue.includes(importPath)) {
                 fileQueue.push(importPath);
             }
