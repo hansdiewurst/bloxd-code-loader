@@ -12,8 +12,10 @@ const safeCallCb = (cb, ...args) => {
     if(typeof cb === "string") cb = globalThis.CBs[cb];
 
     interruptedCbs.push([cb, ...args]);
-    cb?.(...args);
+    const ret = cb?.(...args);
     interruptedCbs.pop();
+
+    return ret;
 };
 for(const cb of usedCallbacks) {
     if(cb === "tick") continue;
@@ -28,7 +30,9 @@ for(const cb of usedCallbacks) {
             }
         });
         globalThis[cb] = id => {
-            joinCb ? safeCallCb(joinCb, id) : ids.push(id);
+            if(joinCb)
+                return safeCallCb(joinCb, id);
+            ids.push(id);
         }
     } else {
         globalThis[cb] = (...args) => safeCallCb(cb, ...args);
